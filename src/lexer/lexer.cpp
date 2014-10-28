@@ -93,6 +93,7 @@ namespace lexer {
         _FSM.reset();
         std::for_each(InputString.begin(), InputString.end(), [&](char C) { _FSM.feed(C); });
         _FSM.feed('\0');
+        _CurrentTokenList.push_back(token(token::end_of_file, "<EOF>"));
         return _CurrentTokenList;
     }
 

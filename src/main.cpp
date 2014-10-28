@@ -1,4 +1,5 @@
 #include "lexer/lexer.h"
+#include "parser/fsm.h"
 #include <iostream>
 
 lexer::v1 Lexer;
@@ -17,5 +18,6 @@ int main() {
         );
         std::cout << std::endl;
     } while(!std::cin.eof());
+    parser::fsm FSM;
     return 0;
 }

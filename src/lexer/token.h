@@ -19,7 +19,9 @@ namespace lexer {
             bracket_angle_close,
             comma,
             arrow,
-            match
+            match,
+            end_of_file,
+            count
         };
     private:
         unsigned int _Type;
