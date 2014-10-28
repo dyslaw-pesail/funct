@@ -7,18 +7,19 @@ X can be
     _
     letters, digits, other symbols
 
+Complete        := Program #EOF
 Program         := Define
                 := Program Define
 Define          := #new DefineLines
 DefineLines     := DefineLine
-                := DefineLines, Define 
+                := DefineLines #, DefineLine
 DefineLine      := Head #-#> Body
 Head            := Identifier#<FuncMatch#> FuncMatch
 Body            := Expression
 FuncMatch       := Variable
                 := Identifier#<#>
                 := Identifier#<FuncMatch#>
-                := #[FuncMatch, FuncMatch#]
+                := #[FuncMatch #, FuncMatch#]
                 := Constant
                 := #_
 Variable        := #UpperCase#{AlphaNum|_}*
@@ -30,6 +31,5 @@ Expression      := Variable
                 := #(Expression#)
                 := Expression Expression
                 := Identifier#<Expression#>
-                := #[Expression, Expression#]
+                := #[Expression #, Expression#]
                 := FuncMatch #= Expression
-
