@@ -1,8 +1,13 @@
-#include "lexer/fsm.h"
+#include "lexer/lexer.h"
+#include <iostream>
+
+lexer::v1 Lexer;
 
 int main() {
-    lexer::fsm::func f = &lexer::fsm::move_to;
-    lexer::fsm *fsm = new lexer::fsm();
-    (fsm->*f)(1);
+    std::string Buffer;
+    do {
+        std::cin >> Buffer;
+        Lexer.tokenize(Buffer);
+    } while(!std::cin.eof());
     return 0;
 }
