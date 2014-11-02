@@ -1,0 +1,2 @@
+whitespace := ~[\n|\t|\0|\s|\r]
+Identifier := Dupa | whitespace

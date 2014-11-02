@@ -1,6 +1,7 @@
 #ifndef UTIL_FSM_H
 #define UTIL_FSM_H
 
+#include <iostream>
 #include <istream>
 #include <iterator>
 #include <map>
@@ -47,8 +48,9 @@ namespace util {
             static iterator end() {
                 return forward_iterator(256);
             }
-            static const char end_of_stream = '\0';
+            static const char end_of_stream;
         };
+        const char input_traits<char>::end_of_stream = '\0';
         template<class InputTraits, 
                  class StateTraits, 
                  class Container>
@@ -71,8 +73,10 @@ namespace util {
             typedef typename OutputTraits::output_type return_type;
             typedef Strategy strategy_type;
             typedef Container input_container_type;
-            static const unsigned int look_head;
+            static const unsigned int look_ahead;
         };
+        template<class IT, class OT, class ST, class C, class S, unsigned int LA>
+        const unsigned int strategy_traits<IT, OT, ST, C, S, LA>::look_ahead = LA;
 
         template<class TransitionTraits,
                  class StrategyTraits>
@@ -84,8 +88,8 @@ namespace util {
                 TransitionTraits::initialize(_States);
             }
             typename StrategyTraits::output_traits::return_type
-            operator()(std::basic_istream<typename StrategyTraits::input_traits::input_type> Stream) {
-                typename StrategyTraits::strategy_type Strategy();
+            operator()(std::basic_istream<typename StrategyTraits::input_traits::input_type>& Stream) {
+                typename StrategyTraits::strategy_type Strategy;
                 typename StrategyTraits::input_container_type InputBuffer;
                 while(Stream.good()) {
                     typename StrategyTraits::input_traits::input_type InputSymbol;
